@@ -36,12 +36,16 @@ export default function Home() {
   }, []);
 
   function getUserId() {
-    let userId = localStorage.getItem("userId");
-    if (!userId) {
-      userId = generateUUID();
-      localStorage.setItem("userId", userId);
+    if (typeof window !== "undefined") {
+      let userId = localStorage.getItem("userId");
+      if (!userId) {
+        userId = generateUUID();
+        localStorage.setItem("userId", userId);
+      }
+      return userId;
     }
-    return userId;
+
+    return null; // ou algum fallback
   }
 
   function generateUUID() {
