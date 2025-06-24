@@ -13,7 +13,7 @@ import Modal from "@/components/Modal";
 export default function Home() {
   const [activeSection, setActiveSection] = useState("Cafés");
   const [modalProduct, setModalProduct] = useState(null);
-
+  const [cart, setCart] = useState([]);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -57,6 +57,21 @@ export default function Home() {
   }
   const userId = getUserId();
 
+  function addToCart(product) {
+    setCart((prev) => [...prev, product]);
+  }
+
+  function removeFromCart(index) {
+    setCart((prev) => prev.filter((_, i) => i !== index));
+  }
+
+  function sendOrderWhatsApp() {
+    if (cart.length === 0) return;
+    const items = cart.map((item, idx) => `${idx + 1}. ${item.title} - ${item.value}`).join('\n');
+    const msg = encodeURIComponent(`esse é meu pedido\n${items}`);
+    window.open(`https://wa.me/5546999011726?text=${msg}`, "_blank");
+  }
+
   return (
     <>
       <Header />
@@ -76,6 +91,10 @@ export default function Home() {
               imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR1LGFciwIJLAVwHIFVz2pck3nsEyXRoYT56g&s',
               ingredients: ["Café moído", "Água quente", "Açúcar opcional"],
             })}
+            onAddToCart={() => addToCart({
+              title: "Café Expresso",
+              value: "R$ 4,45"
+            })}
           />
 
           <Product
@@ -90,6 +109,10 @@ export default function Home() {
               imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR1LGFciwIJLAVwHIFVz2pck3nsEyXRoYT56g&s',
               ingredients: ["Café moído", "Água quente", "Açúcar opcional"],
             })}
+            onAddToCart={() => addToCart({
+              title: "Café Expresso",
+              value: "R$ 4,45"
+            })}
           />
           <Product
             title="Café Expresso"
@@ -102,6 +125,10 @@ export default function Home() {
               title: "Café Expresso",
               imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR1LGFciwIJLAVwHIFVz2pck3nsEyXRoYT56g&s',
               ingredients: ["Café moído", "Água quente", "Açúcar opcional"],
+            })}
+            onAddToCart={() => addToCart({
+              title: "Café Expresso",
+              value: "R$ 4,45"
             })}
           />
           <Product
@@ -116,6 +143,10 @@ export default function Home() {
               imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR1LGFciwIJLAVwHIFVz2pck3nsEyXRoYT56g&s',
               ingredients: ["Café moído", "Água quente", "Açúcar opcional"],
             })}
+            onAddToCart={() => addToCart({
+              title: "Café Expresso",
+              value: "R$ 4,45"
+            })}
           />
           <Product
             title="Café Expresso"
@@ -129,6 +160,10 @@ export default function Home() {
               imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR1LGFciwIJLAVwHIFVz2pck3nsEyXRoYT56g&s',
               ingredients: ["Café moído", "Água quente", "Açúcar opcional"],
             })}
+            onAddToCart={() => addToCart({
+              title: "Café Expresso",
+              value: "R$ 4,45"
+            })}
           />
           <Product
             title="Café Expresso"
@@ -141,6 +176,10 @@ export default function Home() {
               title: "Café Expresso",
               imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR1LGFciwIJLAVwHIFVz2pck3nsEyXRoYT56g&s',
               ingredients: ["Café moído", "Água quente", "Açúcar opcional"],
+            })}
+            onAddToCart={() => addToCart({
+              title: "Café Expresso",
+              value: "R$ 4,45"
             })}
           />
         </Catalogo>
@@ -158,6 +197,10 @@ export default function Home() {
               imageUrl: 'https://images.ctfassets.net/qfxflpv0atz9/sxSX7Ew5uMtc36IyEgCEF/131ddcebbc2530676c3547dce678f360/20220201144535-sucosnaturais-header-fita-scaled.jpg',
               ingredients: ["Café moído", "Água quente", "Açúcar opcional"],
             })}
+            onAddToCart={() => addToCart({
+              title: "Suco natural",
+              value: "R$ 4,45"
+            })}
           />
           <Product
             title="Suco natural"
@@ -170,6 +213,10 @@ export default function Home() {
               title: "Café Expresso",
               imageUrl: 'https://images.ctfassets.net/qfxflpv0atz9/sxSX7Ew5uMtc36IyEgCEF/131ddcebbc2530676c3547dce678f360/20220201144535-sucosnaturais-header-fita-scaled.jpg',
               ingredients: ["Café moído", "Água quente", "Açúcar opcional"],
+            })}
+            onAddToCart={() => addToCart({
+              title: "Suco natural",
+              value: "R$ 4,45"
             })}
           />
           <Product
@@ -184,6 +231,10 @@ export default function Home() {
               imageUrl: 'https://images.ctfassets.net/qfxflpv0atz9/sxSX7Ew5uMtc36IyEgCEF/131ddcebbc2530676c3547dce678f360/20220201144535-sucosnaturais-header-fita-scaled.jpg',
               ingredients: ["Café moído", "Água quente", "Açúcar opcional"],
             })}
+            onAddToCart={() => addToCart({
+              title: "Suco natural",
+              value: "R$ 4,45"
+            })}
           />
           <Product
             title="Suco natural"
@@ -196,6 +247,10 @@ export default function Home() {
               title: "Café Expresso",
               imageUrl: 'https://images.ctfassets.net/qfxflpv0atz9/sxSX7Ew5uMtc36IyEgCEF/131ddcebbc2530676c3547dce678f360/20220201144535-sucosnaturais-header-fita-scaled.jpg',
               ingredients: ["Café moído", "Água quente", "Açúcar opcional"],
+            })}
+            onAddToCart={() => addToCart({
+              title: "Suco natural",
+              value: "R$ 4,45"
             })}
           />
           <Product
@@ -210,6 +265,10 @@ export default function Home() {
               imageUrl: 'https://images.ctfassets.net/qfxflpv0atz9/sxSX7Ew5uMtc36IyEgCEF/131ddcebbc2530676c3547dce678f360/20220201144535-sucosnaturais-header-fita-scaled.jpg',
               ingredients: ["Café moído", "Água quente", "Açúcar opcional"],
             })}
+            onAddToCart={() => addToCart({
+              title: "Suco natural",
+              value: "R$ 4,45"
+            })}
           />
           <Product
             title="Suco natural"
@@ -223,9 +282,69 @@ export default function Home() {
               imageUrl: 'https://images.ctfassets.net/qfxflpv0atz9/sxSX7Ew5uMtc36IyEgCEF/131ddcebbc2530676c3547dce678f360/20220201144535-sucosnaturais-header-fita-scaled.jpg',
               ingredients: ["Café moído", "Água quente", "Açúcar opcional"],
             })}
+            onAddToCart={() => addToCart({
+              title: "Suco natural",
+              value: "R$ 4,45"
+            })}
           />
         </Catalogo>
         <Modal product={modalProduct} onClose={() => setModalProduct(null)} />
+        <button
+          onClick={sendOrderWhatsApp}
+          style={{
+            position: "fixed",
+            bottom: 24,
+            right: 24,
+            background: "#25d366",
+            color: "#fff",
+            border: "none",
+            borderRadius: "50px",
+            padding: "16px 28px",
+            fontSize: "1.1rem",
+            fontWeight: "bold",
+            boxShadow: "0 2px 8px rgba(0,0,0,0.2)",
+            cursor: cart.length === 0 ? "not-allowed" : "pointer",
+            opacity: cart.length === 0 ? 0.6 : 1,
+            zIndex: 2000,
+          }}
+          disabled={cart.length === 0}
+        >
+          Enviar pedido ({cart.length})
+        </button>
+        {cart.length > 0 && (
+          <div style={{
+            position: "fixed",
+            bottom: 80,
+            right: 24,
+            background: "#fff",
+            border: "1px solid #eee",
+            borderRadius: 8,
+            padding: 12,
+            boxShadow: "0 2px 8px rgba(0,0,0,0.08)",
+            maxWidth: 260,
+            zIndex: 2000,
+          }}>
+            <strong>Carrinho:</strong>
+            <ul style={{ margin: 0, padding: 0, listStyle: "none" }}>
+              {cart.map((item, idx) => (
+                <li key={idx} style={{ marginBottom: 4 }}>
+                  {item.title} - {item.value}
+                  <button
+                    onClick={() => removeFromCart(idx)}
+                    style={{
+                      marginLeft: 8,
+                      color: "#c00",
+                      background: "none",
+                      border: "none",
+                      cursor: "pointer",
+                      fontSize: 14,
+                    }}
+                  >x</button>
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
         <footer>
           <h3>Desenvolvido por <a href="https://www.instagram.com/fortysoft/" target="_blank" rel="noopener noreferrer">Forty</a></h3>
         </footer>
